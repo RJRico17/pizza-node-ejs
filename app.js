@@ -4,6 +4,8 @@ import express from 'express';
 //import mariadb
 import mariadb from 'mariadb';
 
+import { validateForm } from './services/validateForm.js';
+
 const pool = mariadb.createPool({
     host: 'localhost',
     user: 'root',
@@ -37,19 +39,6 @@ app.use(express.static('public'));
 //Define a port number for our server to listen on
 const PORT = 3000;
 
-function validateForm(data) {
-    const errors = [];
-    if (!data.fname || data.fname.trim() === "") {
-        errors.push("First name required.");
-    }
-    if (!data.lname || data.lname.trim() === "") {
-        errors.push("Last name required.");
-    }
-    return {
-        isValid: errors.length === 0,
-        errors
-    }
-}
 
 //Define a "default" route for our home page
 app.get('/', (req, res) => {
