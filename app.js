@@ -6,11 +6,14 @@ import mariadb from 'mariadb';
 
 import { validateForm } from './services/validateForm.js';
 
+import dotenv from 'dontenv';
+dotenv.config();
+
 const pool = mariadb.createPool({
-    host: 'localhost',
-    user: 'root',
-    password: '1727',
-    database: 'pizza'
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE
 })
 
 //connect to mariadb
